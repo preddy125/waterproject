@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nishka Reddy - Student</title>
+  <meta name="description" content="Nishka Reddy — Sophomore, EHS, Dublin" />
+
+<link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <div class="wrap" id="page">
+    <header>
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">NR</div>
+        <div>
+          <h1>Nishka Reddy</h1>
+          <p class="lead">Student — Sophomore, EHS, Dublin</p>
+        </div>
+      </div>
+
+      <nav>
+        <button class="btn" onclick="scrollToSection('projects')">Projects</button>
+        <button class="btn" onclick="scrollToSection('contact')">Contact</button>
+      </nav>
+    </header>
+
+    <main class="grid" role="main">
+      <section class="card" aria-labelledby="about-title">
+        <h2 id="about-title">Initiatives</h2>
+        <h4 id="about-title">Water project</h4>
+        <p class="muted">I build secure, reliable SaaS platforms and scale engineering teams. I blend product thinking with pragmatic architecture—APIs, data models, and production-ready systems.</p>
+
+        <h3 style="margin-top:14px">Quick facts</h3>
+        <ul>
+          <li>Led teams from 0 → 50+ engineers</li>
+          <li>Built AI-powered cybersecurity & insurance platforms</li>
+          <li>Experience: Startup to enterprise</li>
+        </ul>
+
+        <h3 style="margin-top:14px" id="projects">Selected projects</h3>
+        <ul class="projects">
+          <li><strong>Polygraph CNAPP</strong> — scalable telemetry & ML pipeline for threat detection.</li>
+          <li><strong>AI Underwriting Platform</strong> — automated risk modeling and claims reduction.</li>
+        </ul>
+
+        <h3 style="margin-top:14px">One-liner</h3>
+        <p class="muted pill">Ship pragmatic systems that scale — with humans in the loop.</p>
+      </section>
+
+      <aside class="card" aria-labelledby="contact-title">
+        <h3 id="contact-title">Contact</h3>
+        <p class="muted">Email: <a href="mailto:nishkareddys@gmail.com">nishkareddys@gmail.com</a></p>
+
+        <div style="margin-top:12px">
+          <h4>Mini bio</h4>
+          <p class="muted">Engineering leader focused on product, security, and scaling high-performing teams.</p>
+        </div>
+
+        <div style="margin-top:14px">
+          <button class="btn" onclick="downloadVCard()">Download vCard</button>
+        </div>
+
+        <div style="margin-top:14px;color:var(--muted);font-size:0.85rem">
+          <strong>Deploy tips</strong>
+          <p class="muted" style="margin:6px 0 0">Push this file to GitHub and enable GitHub Pages (or drag to Netlify/Vercel). Point your domain to the host via DNS A/CNAME records.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Built with ☕ • <span id="year"></span>
+    </footer>
+  </div>
+
+  <script>
+    // small JS: theme toggle, smooth scroll, vCard download, year
+    (function(){
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', stored);
+
+      document.getElementById('themeBtn').addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', cur);
+        localStorage.setItem('theme', cur);
+      });
+
+      window.scrollToSection = id => {
+        const el = document.getElementById(id);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      };
+
+      window.downloadVCard = () => {
+        const vcard = [
+          'BEGIN:VCARD',
+          'VERSION:3.0',
+          'FN:Prab Reddy',
+          'EMAIL;TYPE=work:prabreddy2k@gmail.com',
+          'URL:https://www.linkedin.com/in/prabreddy2k',
+          'END:VCARD'
+        ].join('\\n');
+
+        const blob = new Blob([vcard], {type:'text/vcard'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'prab-reddy.vcf';
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(url);
+      };
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
